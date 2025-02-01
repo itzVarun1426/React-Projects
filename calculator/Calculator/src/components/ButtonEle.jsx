@@ -14,21 +14,21 @@ const buttonValues = [
   "7",
   "8",
   "/",
-  "=",
   "9",
   "0",
+  "=",
   ".",
+  "<-",
 ];
-
-function ButtonEle({ value = buttonValues }) {
+function ButtonEle({ DisplayValue }) {
   return (
     <>
-      {value.map((val) => (
+      {buttonValues.map((val) => (
         <button
           key={val}
           className={styles.ButtonEle}
           onClick={(event) => {
-            console.log(event.target.innerText);
+            DisplayValue({ target: { value: event.target.innerText } });
           }}
         >
           {val}
