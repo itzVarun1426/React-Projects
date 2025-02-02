@@ -16,9 +16,9 @@ const buttonValues = [
   "/",
   "9",
   "0",
-  "=",
-  ".",
   "<-",
+  ".",
+  "=",
 ];
 function ButtonEle({ DisplayValue }) {
   return (
@@ -28,7 +28,7 @@ function ButtonEle({ DisplayValue }) {
           key={val}
           className={styles.ButtonEle}
           onClick={(event) => {
-            DisplayValue({ target: { value: event.target.innerText } });
+            DisplayValue(event);
           }}
         >
           {val}

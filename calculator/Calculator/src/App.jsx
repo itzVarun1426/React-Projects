@@ -7,19 +7,29 @@ import { useState } from "react";
 function App() {
   // let text = "this is test text";
 
-  let [text, setText] = useState("There is no text");
+  let [text, setText] = useState("");
 
   const DisplayValue = (e) => {
-    setText((prev) =>
-      prev === "There is no text" ? e.target.value : e.target.value
-    );
+    const value = e.target.innerText;
+    if (value === "=") {
+      try {
+        setText(Function('"use strict";return (' + text + ")")());
+      } catch {
+        setText("Error");
+      }
+    } else if (value === "C") {
+      setText("");
+    } else if (value === "<-") {
+      if (text.length > 0) setText(text.slice(0, -1));
+    } else {
+      setText(text + value);
+    }
   };
 
   return (
     <>
       <CalculatorGrid>
-        <Display DisplayValue={DisplayValue} />
-        <p>{text}</p>
+        <Display DisplayValue={text} />
         <div className="ButtonGrid">
           <ButtonEle DisplayValue={DisplayValue} />
         </div>

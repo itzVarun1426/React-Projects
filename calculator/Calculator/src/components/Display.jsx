@@ -1,13 +1,13 @@
 import styles from "./Display.module.css";
-function Display({DisplayValue}) {
-  
+function Display({ DisplayValue }) {
   return (
     <div>
       <input
         type="text"
         className={styles.Display}
         placeholder="Expression"
-        onChange={DisplayValue}
+        value={DisplayValue}
+        readOnly
       />
     </div>
   );
