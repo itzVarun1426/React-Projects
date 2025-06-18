@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState ,useRef} from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
 import "./App.css";
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
   const [includeUppercase, setIncludeUppercase] = useState(false);
   const [password, setPassword] = useState("");
 
-   const passwordRef = useRef(null);
+  const passwordRef = useRef(null);
   const passwordGenerator = useCallback(() => {
     let str = "abcdefghijklmnopqrstuvwxyz";
     if (includeUppercase) str += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -17,7 +17,7 @@ function App() {
     let password = "";
     for (let i = 0; i < length; i++) {
       const randomIndex = Math.floor(Math.random() * str.length);
-      password += str.charAt(randomIndex);
+      password += str[randomIndex];
     }
     setPassword(password);
   }, [
@@ -27,12 +27,18 @@ function App() {
     includeUppercase,
     setPassword,
   ]);
-  useEffect(()=>{
+  useEffect(() => {
     passwordGenerator();
-  },[passwordGenerator, includeNumbers , includeCharacters , includeUppercase, length])
+  }, [
+    passwordGenerator,
+    includeNumbers,
+    includeCharacters,
+    includeUppercase,
+    length,
+  ]);
   return (
     <>
-      <div className="w-full max-w-md mx-auto shadow-md rounded-lg px-4 py-3 my-8 bg-gray-800 text-orange-500">
+      <div className="w-full max-w-xl mx-auto shadow-md rounded-lg px-4 py-3 my-8 bg-gray-800 text-orange-500">
         <h1 className="text-white text-2xl text-center my-3">
           Password generator
         </h1>
@@ -45,12 +51,14 @@ function App() {
             readOnly
             ref={passwordRef}
           />
-          <button className="outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0" 
-          onClick={() => {
-            passwordRef.current.select();
-            window.navigator.clipboard.writeText(passwordRef.current.value);
-            alert("Password copied to clipboard!");
-          }}>
+          <button
+            className="outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0"
+            onClick={() => {
+              passwordRef.current.select();
+              window.navigator.clipboard.writeText(passwordRef.current.value);
+              alert("Password copied to clipboard!");
+            }}
+          >
             copy
           </button>
         </div>
@@ -62,9 +70,7 @@ function App() {
               max={20}
               value={length}
               className="cursor-pointer"
-              onChange = {
-                (e) => setLength(Number(e.target.value))
-              }
+              onChange={(e) => setLength(Number(e.target.value))}
             />
             <label>Length: {length}</label>
           </div>
@@ -73,11 +79,9 @@ function App() {
               type="checkbox"
               defaultChecked={includeNumbers}
               id="numberInput"
-              onChange={(e) =>{
+              onChange={(e) => {
                 setIncludeNumbers((prev) => !prev);
-                
               }}
-             
             />
             <label htmlFor="numberInput">Numbers</label>
           </div>
@@ -86,11 +90,9 @@ function App() {
               type="checkbox"
               defaultChecked={includeCharacters}
               id="characterInput"
-              onChange={(e) =>{
+              onChange={(e) => {
                 setIncludeCharacters((prev) => !prev);
-                
               }}
-    
             />
             <label htmlFor="characterInput">Characters</label>
           </div>
@@ -99,13 +101,12 @@ function App() {
               type="checkbox"
               defaultChecked={includeUppercase}
               id="uppercaseInput"
-              onChange={(e) =>{
+              onChange={(e) => {
                 setIncludeUppercase((prev) => !prev);
-
               }}
             />
             <label htmlFor="uppercaseInput">Uppercase</label>
-            </div>
+          </div>
         </div>
       </div>
     </>
