@@ -35,13 +35,15 @@ export class AuthService {
         }
 
     }
-    async getCurrentUser(){
+    async getCurrentUser() {
         try {
             return await this.account.get();
         } catch (error) {
-            throw error;
+            console.log("the user not exist", error);
+
+            return null
         }
-        return null;
+
     }
     async logout() {
         try {
@@ -51,3 +53,4 @@ export class AuthService {
         }
     }
 }
+export const authService = new AuthService();
