@@ -8,7 +8,7 @@ export class AuthService {
     constructor() {
         this.client
             .setEndpoint(conf.appwriteUrl)
-            .setProject(conf.appwriteProductId); // ✅ matches your conf.js
+            .setProject(conf.appwriteProductId);
         this.account = new Account(this.client);
     }
 
@@ -38,7 +38,7 @@ export class AuthService {
         try {
             return await this.account.get();
         } catch (error) {
-            console.warn("User not logged in:", error.message);
+            console.console("User not logged in:", error.message);
             return null;
         }
     }
