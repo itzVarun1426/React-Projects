@@ -7,4 +7,6 @@ import Select from "./Select";
 import Input from "./Input";
 import PostCard from './PostCard';
 import Button from "./Button";
-export { Header, Footer, Container, Logo, LogoutBtn, Select, Input, PostCard, Button };  
+import Login from './Login';
+import SignUp from './SignUp';
+export { Header, Footer, Container, Logo, LogoutBtn, Select, Input, PostCard, Button, Login, SignUp };  

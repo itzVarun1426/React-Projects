@@ -1,10 +1,9 @@
 import { useDispatch } from "react-redux";
-import { Header, Footer, PostCard } from "./components/components.js";
+import { SignUp } from "./components/components.js";
 import { useState, useEffect, useRef } from "react";
 import { authService } from "./appwrite/auth";
 import "./App.css";
 import { login, logout } from "./store/authSlice";
-
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -15,7 +14,7 @@ function App() {
   //     .getCurrentUser()
   //     .then((user) => {
   //       if (user) {
-  //         dispatch(login({ userData: user }));
+  //         dispatch(SignUp({ userData: user }));
   //       } else {
   //         dispatch(logout());
   //       }
@@ -29,12 +28,7 @@ function App() {
   const ref = useRef(null);
   return (
     <div className="min-h-screen flex flex-wrap  bg-gray-400">
-      <div className="w-full">
-        <Header />
-        <main className="flex-grow">{/* TODO:  <Outlet /> */}</main>
-        <PostCard></PostCard>
-        <Footer />
-      </div>
+      <SignUp></SignUp>
     </div>
   );
   // ) : null;
