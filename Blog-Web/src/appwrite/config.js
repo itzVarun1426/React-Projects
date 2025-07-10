@@ -1,7 +1,7 @@
 import conf from '../conf/conf.js';
 import { Client, ID, Databases, Query, Storage } from 'appwrite';
 
-export default class Service {
+export class Service {
     client = new Client();
     databases;
     bucket;
@@ -29,7 +29,7 @@ export default class Service {
             throw error;
         }
     }
-    async updataPost(slug, { title, content, featuredImage, status }) {
+    async updatePost(slug, { title, content, featuredImage, status }) {
         try {
             return await this.databases.updateDocument(
                 conf.appwriteDatabaseId,
@@ -90,7 +90,7 @@ export default class Service {
             throw error;
         }
     }
-    async deleteFIle(fileId) {
+    async deleteFile(fileId) {
         try {
             await this.bucket.deleteFile(conf.appwriteBucketId, fileId);
             return true;
@@ -105,3 +105,5 @@ export default class Service {
     }
 
 }
+
+export default new Service();

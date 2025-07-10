@@ -1,9 +1,10 @@
 import { useDispatch } from "react-redux";
-import { SignUp } from "./components/components.js";
+import { RTE, Button, PostForm } from "./components/components.js";
 import { useState, useEffect, useRef } from "react";
 import { authService } from "./appwrite/auth";
 import "./App.css";
 import { login, logout } from "./store/authSlice";
+import { useForm } from "react-hook-form";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -25,10 +26,16 @@ function App() {
   // }, []);
 
   // return !loading ? (
+
+  const { control, handleSubmit } = useForm();
+
   const ref = useRef(null);
+  const formSubmitted = (data) => {
+    console.log(data);
+  };
   return (
     <div className="min-h-screen flex flex-wrap  bg-gray-400">
-      <SignUp></SignUp>
+      <PostForm />
     </div>
   );
   // ) : null;

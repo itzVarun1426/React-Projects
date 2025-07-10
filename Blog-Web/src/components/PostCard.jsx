@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Service from "../appwrite/config";
+import { Service } from "../appwrite/config";
 
 const service = new Service();
 

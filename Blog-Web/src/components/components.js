@@ -9,4 +9,7 @@ import PostCard from './PostCard';
 import Button from "./Button";
 import Login from './Login';
 import SignUp from './SignUp';
-export { Header, Footer, Container, Logo, LogoutBtn, Select, Input, PostCard, Button, Login, SignUp };  
+import RTE from './RTE';
+import PostForm from './postform/PostForm';
+
+export { Header, Footer, Container, Logo, LogoutBtn, Select, Input, PostCard, Button, Login, SignUp, RTE, PostForm };  
