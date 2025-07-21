@@ -38,7 +38,7 @@ export class AuthService {
         try {
             return await this.account.get();
         } catch (error) {
-            console.console("User not logged in:", error.message);
+            console.log("User not logged in:", error.message);
             return null;
         }
     }

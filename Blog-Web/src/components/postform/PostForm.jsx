@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Input, RTE, Select } from "../components";
 import { useNavigate } from "react-router-dom";
@@ -16,99 +16,101 @@ const PostForm = ({ post }) => {
         status: post?.status || "active",
       },
     });
+
   const userData = useSelector((state) => state.auth.user);
 
   const submit = async (data) => {
+    console.log("Form submitted", data);
     if (post) {
       const fileData = data.image[0]
-        ? appwriteService.uploadFile(data.image[0])
+        ? await appwriteService.uploadFile(data.image[0])
         : null;
 
       if (fileData) {
-        appwriteService.deleteFile(post.featuredImage);
+        await appwriteService.deleteFile(post.featuredImage);
       }
+
       const dbPost = await appwriteService.updatePost(post.$id, {
         ...data,
-        featuredImage: fileData ? fileData.$id : undefined,
+        featuredImage: fileData ? fileData.$id : post.featuredImage,
       });
+
       if (dbPost) {
         navigate(`/post/${dbPost.$id}`);
       }
     } else {
-      const fileData = (await data.image[0])
-        ? appwriteService.uploadFile(data.image[0])
+      const fileData = data.image[0]
+        ? await appwriteService.uploadFile(data.image[0])
         : null;
 
       if (fileData) {
-        const fileId = fileData.$id;
-        data.featuredImage = fileId;
-        const dbPost = await appwriteService.createPost({
-          ...data,
-          userId: userData.$id,
-        });
-        if (dbPost) {
-          navigate(`/post/${dbPost.$id}`);
-        }
+        data.featuredImage = fileData.$id;
       }
-      console.log(data);
+
+      const dbPost = await appwriteService.createPost({
+        ...data,
+        userId: userData.$id,
+      });
+
+      if (dbPost) {
+        navigate(`/post/${dbPost.$id}`);
+      }
     }
   };
+
   const slugTransform = useCallback((value) => {
     if (value && typeof value === "string") {
       return value
         .toString()
-        .trim() // Remove leading/trailing spaces
-        .toLowerCase() // Convert to lowercase
-        .replace(/[^\w\s-]/g, "") // Remove all non-word chars (except space and dash)
-        .replace(/\s+/g, "-") // Replace spaces with hyphen
-        .replace(/--+/g, "-") // Replace multiple hyphens with single
+        .trim()
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, "")
+        .replace(/\s+/g, "-")
+        .replace(/--+/g, "-")
         .replace(/^-+|-+$/g, "");
     }
     return "";
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const subscription = watch((value, { name }) => {
       if (name === "title") {
-        setValue("slug", slugTransform(value.title, { shouldValidate: true }));
+        setValue("slug", slugTransform(value.title), {
+          shouldValidate: true,
+        });
       }
     });
-    return () => {
-      subscription.unsubscribe();
-    };
+    return () => subscription.unsubscribe();
   }, [watch, slugTransform, setValue]);
 
   return (
-    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap ">
+    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
       <div className="w-2/3 px-2">
         <Input
           label="Title :"
           placeholder="Title"
           className="mb-4"
-          {...register("title", {
-            required: true,
-          })}
+          {...register("title", { required: true })}
         />
         <Input
           label="Slug :"
           placeholder="Slug"
           className="mb-4"
-          {...register("slug", {
-            required: true,
-          })}
-          onInput={(e) => {
+          {...register("slug", { required: true })}
+          onInput={(e) =>
             setValue("slug", slugTransform(e.currentTarget.value), {
               shouldValidate: true,
-            });
-          }}
+            })
+          }
         />
         <RTE
           label="Content :"
-          name="Content"
+          name="content"
           control={control}
-          defaultValue={getValues("Content")}
+          defaultValue={getValues("content")}
         />
       </div>
+
       <div className="w-1/3 px-2">
         <Input
           label="Featured Image :"
@@ -117,6 +119,7 @@ const PostForm = ({ post }) => {
           accept="image/png, image/jpg, image/jpeg, image/gif"
           {...register("image", { required: !post })}
         />
+
         {post && (
           <div className="w-full mb-4">
             <img
@@ -126,20 +129,21 @@ const PostForm = ({ post }) => {
             />
           </div>
         )}
+
         <Select
           options={["active", "inactive"]}
           label="Status"
           className="mb-4"
           {...register("status", { required: true })}
         />
-        <Button
-          type="submit"
-          bgColor={post ? "bg-green-500" : undefined}
-          className="w-full"
-        >
-          {post ? "Update" : "Submit"}
-        </Button>
       </div>
+      <Button
+        type="submit"
+        bgColor={post ? "bg-green-500" : undefined}
+        className="w-full hover:bg-green-400 hover:text-black"
+      >
+        {post ? "Update" : "Submit"}
+      </Button>
     </form>
   );
 };

@@ -19,13 +19,12 @@ const EditPost = () => {
   }, [slug, navigate]);
 
   return posts ? (
-<div className="py-8">
-    <Container>
-        <PostForm post = {posts}></PostForm>
-    </Container>
-</div>
-
-  ):null;   
+    <div className="py-8">
+      <Container>
+        <PostForm post={posts}></PostForm>
+      </Container>
+    </div>
+  ) : null;
 };
 
 export default EditPost;

@@ -1,7 +1,7 @@
 import React from "react";
 import { SignUp as SignupComponent } from "../components/components";
 
-const SignUp = () => {
+const SignupPage = () => {
   return (
     <div className="py-8">
       <SignupComponent />
@@ -9,4 +9,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignupPage;

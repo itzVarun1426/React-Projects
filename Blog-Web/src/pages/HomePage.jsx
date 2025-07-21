@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, PostCard } from "../components/components";
 import appwriteService from "../appwrite/config";
-const Home = () => {
+const HomePage = () => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     appwriteService.listPost().then((post) => {
@@ -39,4 +39,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

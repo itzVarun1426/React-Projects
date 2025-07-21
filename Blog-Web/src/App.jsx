@@ -1,44 +1,49 @@
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { RTE, Button, PostForm } from "./components/components.js";
-import { useState, useEffect, useRef } from "react";
-import { authService } from "./appwrite/auth";
 import "./App.css";
+import { authService } from "./appwrite/auth";
 import { login, logout } from "./store/authSlice";
-import { useForm } from "react-hook-form";
+import { Footer, Header } from "./components/components";
+import { Outlet } from "react-router-dom";
 
 function App() {
-  const [loading, setLoading] = useState(false);
-  // const dispatch = useDispatch();
-  // useEffect(() => {
+  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
 
-  //   authService
-  //     .getCurrentUser()
-  //     .then((user) => {
-  //       if (user) {
-  //         dispatch(SignUp({ userData: user }));
-  //       } else {
-  //         dispatch(logout());
-  //       }
-  //     })
-  //     .finally(() => {
-  //       setLoading(false);
-  //     });
-  // }, []);
+  useEffect(() => {
+    authService
+      .getCurrentUser()
+      .then((userData) => {
+        if (userData) {
+          dispatch(login({ userData }));
+        } else {
+          dispatch(logout());
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching current user:", error);
+        dispatch(logout());
+      })
+      .finally(() => setLoading(false));
+  }, [dispatch]);
 
-  // return !loading ? (
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        <p className="text-lg font-semibold text-gray-600">Loading...</p>
+      </div>
+    );
+  }
 
-  const { control, handleSubmit } = useForm();
-
-  const ref = useRef(null);
-  const formSubmitted = (data) => {
-    console.log(data);
-  };
   return (
-    <div className="min-h-screen flex flex-wrap  bg-gray-400">
-      <PostForm />
+    <div className="min-h-screen flex flex-col bg-gray-400">
+      <Header />
+      <main className="flex-grow">
+        <Outlet /> {/* 🔥 This renders the matched child route */}
+      </main>
+      <Footer />
     </div>
   );
-  // ) : null;
 }
 
 export default App;
