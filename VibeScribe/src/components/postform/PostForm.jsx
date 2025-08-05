@@ -40,10 +40,13 @@ const PostForm = ({ post }) => {
       if (file) {
         data.featuredImage = file.$id;
       }
+      console.log(data);
+      console.log(userData);
+      console.log(userData.user.$id);
 
       const createdPost = await appwriteConfig.createPost({
         ...data,
-        userId: userData.$id,
+        userId: userData.user.$id,
       });
 
       if (createdPost) navigate(`/post/${createdPost.$id}`);

@@ -2,7 +2,7 @@ import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import Container from "./Container";
 import Logo from "./Logo";
-import LogoutBtn from "./header/Header";
+import LogoutBtn from "./header/LogoutBtn";
 import AuthLayout from "./AuthLayout";
 import Input from "./Input";
 import Button from "./Button";
@@ -17,7 +17,7 @@ import AllPosts from "../pages/AllPosts";
 import EditPost from "../pages/EditPost";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
-import SignupPage from "../pages/SignupPage";
+import SignupPage from "../pages/SignUpPage";
 import PostPage from "../pages/PostPage";
 
 

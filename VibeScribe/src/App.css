@@ -1,0 +1,156 @@
+:root {
+  --midnight-bg: #0a1124;
+  --primary-blue: #1e2a47;
+  --accent-blue: #3a4a6b;
+  --highlight-cyan: #00b4d8;
+  --text-main: #f5f6fa;
+  --text-secondary: #b0b8c1;
+}
+
+body {
+  background: var(--midnight-bg);
+  color: var(--text-main);
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  min-height: 100vh;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInTop {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseOnce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce2 {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-5px);
+  }
+  75% {
+    transform: translateY(5px);
+  }
+}
+
+@keyframes blob1 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes blob2 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  40% {
+    transform: translate(-40px, 60px) scale(1.2);
+  }
+  80% {
+    transform: translate(20px, -30px) scale(0.95);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes blob3 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(50px, 40px) scale(1.15);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.7s ease-out forwards;
+}
+
+.animate-slide-in-top {
+  animation: slideInTop 0.8s ease-out forwards;
+}
+
+.animate-pulse-once {
+  animation: pulseOnce 1.5s ease-in-out infinite;
+}
+
+.animate-bounce-2 {
+  animation: bounce2 2s infinite;
+}
+
+.animate-blob-1 {
+  animation: blob1 10s infinite alternate;
+}
+.animate-blob-2 {
+  animation: blob2 12s infinite alternate-reverse;
+}
+.animate-blob-3 {
+  animation: blob3 11s infinite alternate;
+}
+
+/* Utility for glassmorphism */
+.glass {
+  background: rgba(30, 42, 71, 0.7);
+  box-shadow: 0 8px 32px 0 rgba(10, 17, 36, 0.37);
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 180, 216, 0.18);
+}
+
+.glass-light-border {
+  border: 1px solid rgba(0, 180, 216, 0.3);
+}

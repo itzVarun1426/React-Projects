@@ -15,18 +15,22 @@ function Signup() {
   const create = async (data) => {
     setError("");
     try {
-      const createdUser = await authService.createAccount(data);
+      // Step 1: Create account (also logs in the user via session)
+      await authService.createAccount(data);
 
-      if (createdUser) {
-        const currentUser = await authService.getCurrentUser();
-        if (currentUser) {
-          dispatch(login(currentUser));
-          navigate("/");
-        }
+      // Step 2: Fetch current user (now session exists, so this will succeed)
+      const currentUser = await authService.getCurrentUser();
+
+      // Step 3: Store in Redux and redirect
+      if (currentUser) {
+        dispatch(login(currentUser));
+        navigate("/");
+      } else {
+        setError("Account created but failed to fetch user info.");
       }
     } catch (error) {
       console.error("Signup error:", error);
-      setError(error.message);
+      setError(error.message || "Something went wrong during signup.");
     }
   };
 

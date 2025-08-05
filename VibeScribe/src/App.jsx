@@ -14,7 +14,7 @@ function App() {
     const fetchUser = async () => {
       try {
         const user = await authService.getCurrentUser();
-        if (user) dispatch(login(user));
+        if (user) dispatch(login({ user }));
         else dispatch(logout());
       } catch (err) {
         console.error("Error fetching current user:", err.message);
@@ -26,7 +26,6 @@ function App() {
 
     fetchUser();
   }, [dispatch]);
-
   return !loading ? (
     <div className="min-h-screen flex flex-wrap content-between bg-gray-400">
       <div className="w-full block">
@@ -37,7 +36,11 @@ function App() {
         <Footer />
       </div>
     </div>
-  ) : null;
+  ) : (
+    <div className="min-h-screen flex items-center justify-center bg-gray-200">
+      <p className="text-lg font-semibold">Loading...</p>
+    </div>
+  );
 }
 
 export default App;
