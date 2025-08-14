@@ -9,20 +9,25 @@ function PostCard({ $id, title, featuredImage }) {
 
   return (
     <Link to={`/post/${$id}`}>
-      <div className="w-full bg-gray-100 rounded-xl p-4 hover:shadow-md transition-shadow duration-300">
-        <div className="w-full justify-center mb-4">
-          {imageUrl && (
-            <div className="w-full aspect-w-16 aspect-h-9 mb-4 overflow-hidden rounded-xl shadow-lg border border-blue-900 bg-[#1e2a47]">
-              <img
-                src={imageUrl}
-                alt={title || "Post Image"}
-                className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                loading="lazy"
-              />
-            </div>
-          )}
+      <div className="rounded-xl overflow-hidden shadow-lg transition-transform duration-300 hover:-translate-y-2 hover:scale-[1.02] bg-white/5 border border-white/10 backdrop-blur-md">
+        {/* Image */}
+        {imageUrl && (
+          <div className="relative w-full overflow-hidden aspect-[16/9]">
+            <img
+              src={imageUrl}
+              alt={title || "Post Image"}
+              className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+              loading="lazy"
+            />
+          </div>
+        )}
+
+        {/* Content */}
+        <div className="p-4 sm:p-5">
+          <h2 className="text-lg sm:text-xl font-semibold text-white truncate">
+            {title}
+          </h2>
         </div>
-        <h2 className="text-xl font-bold">{title}</h2>
       </div>
     </Link>
   );

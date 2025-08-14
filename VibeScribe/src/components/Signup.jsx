@@ -15,13 +15,9 @@ function Signup() {
   const create = async (data) => {
     setError("");
     try {
-      // Step 1: Create account (also logs in the user via session)
       await authService.createAccount(data);
-
-      // Step 2: Fetch current user (now session exists, so this will succeed)
       const currentUser = await authService.getCurrentUser();
 
-      // Step 3: Store in Redux and redirect
       if (currentUser) {
         dispatch(login(currentUser));
         navigate("/");
@@ -35,41 +31,67 @@ function Signup() {
   };
 
   return (
-    <div className="flex items-center justify-center">
-      <div className="mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10">
-        <div className="mb-2 flex justify-center">
+    <div className="mt-0 min-h-screen flex items-center justify-center bg-black px-4 pt-20">
+      {/* pt-20 ensures it starts below the navbar */}
+
+      {/* Form Container */}
+      <div className="w-full max-w-lg bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8 sm:p-10 shadow-2xl animate-fadeIn">
+        {/* Logo */}
+        <div className="mb-6 flex justify-center">
           <span className="inline-block w-full max-w-[100px]">
             <Logo width="100%" />
           </span>
         </div>
-        <h2 className="text-center text-2xl font-bold leading-tight">
+
+        {/* Title */}
+        <h2 className="text-center text-3xl font-extrabold bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
           Sign up to create account
         </h2>
-        <p className="mt-2 text-center text-base text-black/60">
-          Already have an account?&nbsp;
+
+        {/* Subtitle */}
+        <p className="mt-3 text-center text-base text-gray-400">
+          Already have an account?{" "}
           <Link
             to="/login"
-            className="font-medium text-primary transition-all duration-200 hover:underline"
+            className="font-semibold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent hover:underline"
           >
             Sign In
           </Link>
         </p>
-        {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
 
-        <form onSubmit={handleSubmit(create)} autoComplete="off">
-          <div className="space-y-5">
+        {/* Error Message */}
+        {error && (
+          <p className="text-red-500 mt-6 text-center font-medium">{error}</p>
+        )}
+
+        {/* Form */}
+        <form
+          onSubmit={handleSubmit(create)}
+          autoComplete="off"
+          className="mt-8 space-y-6"
+        >
+          <div>
+            <label className="block mb-2 text-sm font-semibold bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
+              Full Name
+            </label>
             <Input
-              label="Full Name: "
               type="text"
               placeholder="Enter your full name"
+              className="bg-black/40 border border-white/10 text-black placeholder-gray-400 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
               {...register("name", {
                 required: "Full name is required",
               })}
             />
+          </div>
+
+          <div>
+            <label className="block mb-2 text-sm font-semibold bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
+              Email
+            </label>
             <Input
-              label="Email: "
               type="email"
               placeholder="Enter your email"
+              className="bg-black/40 border border-white/10 text-black placeholder-gray-400 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
               {...register("email", {
                 required: "Email is required",
                 validate: {
@@ -79,10 +101,16 @@ function Signup() {
                 },
               })}
             />
+          </div>
+
+          <div>
+            <label className="block mb-2 text-sm font-semibold bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
+              Password
+            </label>
             <Input
-              label="Password: "
               type="password"
               placeholder="Enter your password"
+              className="bg-black/40 border border-white/10 text-black placeholder-gray-400 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
               {...register("password", {
                 required: "Password is required",
                 minLength: {
@@ -91,10 +119,15 @@ function Signup() {
                 },
               })}
             />
-            <Button type="submit" className="w-full">
-              Create Account
-            </Button>
           </div>
+
+          {/* Submit Button */}
+          <Button
+            type="submit"
+            className="w-full py-3 text-lg font-bold rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:scale-105 transition-transform duration-300 shadow-lg hover:shadow-cyan-500/30"
+          >
+            Create Account
+          </Button>
         </form>
       </div>
     </div>

@@ -7,6 +7,8 @@ import {
   FaFeatherAlt,
   FaArrowRight,
 } from "react-icons/fa";
+import Galaxy from "../components/external/Galaxy";
+import TextType from "../components/external/TextType";
 
 const features = [
   {
@@ -28,42 +30,63 @@ const features = [
 
 const LandingHome = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-900 via-gray-900 to-black text-white font-sans">
-      {/* Hero */}
-      <section className="relative flex flex-col items-center justify-center text-center px-4 py-24">
-        <h1 className="text-6xl md:text-7xl lg:text-8xl font-extrabold bg-gradient-to-br from-cyan-400 to-blue-600 text-transparent bg-clip-text drop-shadow-2xl mb-6 animate-fadeIn">
-          VibeScribe
-        </h1>
-        <p className="text-xl md:text-2xl text-gray-300 mb-10 animate-fadeIn delay-200">
-          Unlock your voice. Share your world.
-        </p>
-        <Link to="/signup">
-          <button className="px-10 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-full shadow-lg text-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-cyan-500 focus:ring-opacity-50 animate-bounce">
-            Start Your Journey
-          </button>
-        </Link>
+    <div className="text-white font-sans">
+      <section className="relative min-h-screen flex flex-col items-center justify-center text-center py-32 sm:py-40 overflow-hidden">
+        <div style={{ width: "100%", height: "1000px", position: "absolute" }}>
+          <Galaxy
+            mouseRepulsion={false}
+            mouseInteraction={false}
+            density={0.7}
+            glowIntensity={0.2}
+            saturation={0}
+            // hueShift={140}
+            transparent={false}
+            twinkleIntensity={1}
+            rotationSpeed={0.1}
+            starSpeed={0.5}
+          />
+        </div>
+        {/* Hero Content */}
+        <div className="relative z-10 ">
+          <h2
+            className="text-6xl md:text-7xl lg:text-8xl font-extrabold bg-gradient-to-br from-cyan-400 to-blue-600 text-transparent bg-clip-text drop-shadow-2xl mb-16 animate-fadeIn 
+           "
+          >
+            <TextType
+              text={["Welcome to VIBESCRIBE"]}
+              typingSpeed={95}
+              pauseDuration={1500}
+              showCursor={true}
+              cursorCharacter="|"
+              // textColors={["cyan"]}
+              textColors={["from-cyan-400 to-blue-600"]}
+              loop={true}
+            />
+          </h2>
 
-        {/* Glass circles */}
-        <div className="absolute top-1/4 left-1/3 w-60 h-60 bg-blue-500 opacity-30 blur-3xl rounded-full animate-pulse"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-72 h-72 bg-cyan-400 opacity-20 blur-2xl rounded-full animate-pulse delay-300"></div>
+          <p className=" text-xl md:text-2xl text-gray-300 mb-10 animate-fadeIn delay-200 ">
+            Unlock your voice. Share your world.
+          </p>
+          <Link to="/signup">
+            <button className="px-10 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-full shadow-xl text-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-cyan-500 focus:ring-opacity-50 animate-bounce">
+              Start Your Journey
+            </button>
+          </Link>
+        </div>
       </section>
 
-      {/* Graphic */}
-      <section className="px-4 py-12 flex justify-center items-center">
+      {/* Other Sections With Their Own Backgrounds */}
+      {/* <section className="bg-black px-4 py-12 flex justify-center items-center">
         <div className="relative w-full max-w-5xl">
           <img
             src="https://images.unsplash.com/photo-1510519138101-570d1dca3d6b?auto=format&fit=crop&w=1200&q=80"
             alt="Creative writing"
             className="rounded-3xl shadow-2xl w-full aspect-video object-cover animate-fadeIn"
           />
-          <span className="absolute text-sm text-gray-400 right-4 bottom-4">
-            (Replace with custom illustration)
-          </span>
         </div>
-      </section>
+      </section> */}
 
-      {/* Features */}
-      <section className="max-w-6xl mx-auto py-20 px-4 grid grid-cols-1 md:grid-cols-3 gap-10">
+      <section className="bg-black w-full  mx-auto py-20 px-4 grid grid-cols-1 md:grid-cols-3 gap-10">
         {features.map((f, i) => (
           <div
             key={i}
@@ -79,8 +102,7 @@ const LandingHome = () => {
         ))}
       </section>
 
-      {/* How it Works */}
-      <section className="bg-gradient-to-b from-gray-900 via-gray-800 to-black py-20 px-4 text-center">
+      <section className="bg-black py-20 px-4 text-center">
         <h2 className="text-4xl font-bold mb-6 animate-fadeIn">How It Works</h2>
         <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-12 animate-fadeIn delay-200">
           Join in seconds, create your first post in minutes. Grow your
@@ -94,8 +116,7 @@ const LandingHome = () => {
         </Link>
       </section>
 
-      {/* CTA */}
-      <section className="text-center py-20 px-4 bg-black/80">
+      <section className="bg-black text-center py-20 px-4">
         <h2 className="text-4xl font-extrabold text-white mb-6 animate-fadeIn delay-500">
           Ready to Dive In?
         </h2>

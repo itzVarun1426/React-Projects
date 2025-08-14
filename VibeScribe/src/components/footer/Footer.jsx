@@ -5,140 +5,113 @@ import { FaHeart, FaGithub } from "react-icons/fa";
 
 function Footer() {
   return (
-    <section className="relative overflow-hidden py-10 bg-[var(--primary-blue)] text-[var(--text-secondary)] border-t border-[var(--accent-blue)]">
-      <div className="relative z-10 mx-auto max-w-7xl px-4">
-        <div className="flex flex-wrap justify-between items-center">
-          <div className="w-full md:w-1/3 p-4">
-            <div className="mb-4 inline-flex items-center">
+    <footer className="bg-gray-900 text-gray-300 border-t border-gray-700 py-12">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex flex-col md:flex-row justify-between items-start gap-10">
+          <div className="md:w-1/3">
+            <div className="mb-4">
               <Logo width="100px" />
             </div>
-            <p className="text-sm text-[var(--text-secondary)] mt-2">
+            <p className="text-sm mb-1">
               &copy; {new Date().getFullYear()} VibeScribe. All Rights Reserved.
             </p>
-            <p className="text-sm text-[var(--text-secondary)] mt-1 flex items-center">
-              Made with <FaHeart className="text-red-500 mx-1" /> by Varun
+            <p className="text-sm flex items-center gap-1">
+              Made with <FaHeart className="text-red-500" /> by Varun
             </p>
           </div>
 
-          <div className="w-full md:w-2/3 p-4 flex flex-wrap justify-around">
-            <div className="w-1/2 lg:w-1/4 mb-6 lg:mb-0">
-              <h3 className="tracking-px mb-4 text-xs font-semibold uppercase text-[var(--highlight-cyan)]">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 w-full">
+            {/* Company */}
+            <div>
+              <h4 className="text-cyan-400 font-semibold uppercase tracking-wider mb-3 text-xs">
                 Company
-              </h3>
-              <ul>
-                <li className="mb-2">
-                  <Link
-                    className="text-base font-medium text-[var(--text-main)] hover:text-[var(--highlight-cyan)] transition-colors duration-200"
-                    to="/"
-                  >
+              </h4>
+              <ul className="space-y-2">
+                <li>
+                  <Link to="/" className="hover:text-cyan-300">
                     About Us
                   </Link>
                 </li>
-                <li className="mb-2">
-                  <Link
-                    className="text-base font-medium text-[var(--text-main)] hover:text-[var(--highlight-cyan)] transition-colors duration-200"
-                    to="/"
-                  >
+                <li>
+                  <Link to="/" className="hover:text-cyan-300">
                     Careers
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    className="text-base font-medium text-[var(--text-main)] hover:text-[var(--highlight-cyan)] transition-colors duration-200"
-                    to="/"
-                  >
+                  <Link to="/" className="hover:text-cyan-300">
                     Team
                   </Link>
                 </li>
               </ul>
             </div>
 
-            <div className="w-1/2 lg:w-1/4 mb-6 lg:mb-0">
-              <h3 className="tracking-px mb-4 text-xs font-semibold uppercase text-[var(--highlight-cyan)]">
+            <div>
+              <h4 className="text-cyan-400 font-semibold uppercase tracking-wider mb-3 text-xs">
                 Support
-              </h3>
-              <ul>
-                <li className="mb-2">
-                  <Link
-                    className="text-base font-medium text-[var(--text-main)] hover:text-[var(--highlight-cyan)] transition-colors duration-200"
-                    to="/"
-                  >
+              </h4>
+              <ul className="space-y-2">
+                <li>
+                  <Link to="/" className="hover:text-cyan-300">
                     Help Center
                   </Link>
                 </li>
-                <li className="mb-2">
-                  <Link
-                    className="text-base font-medium text-[var(--text-main)] hover:text-[var(--highlight-cyan)] transition-colors duration-200"
-                    to="/"
-                  >
+                <li>
+                  <Link to="/" className="hover:text-cyan-300">
                     Contact Us
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    className="text-base font-medium text-[var(--text-main)] hover:text-[var(--highlight-cyan)] transition-colors duration-200"
-                    to="/"
-                  >
+                  <Link to="/" className="hover:text-cyan-300">
                     FAQs
                   </Link>
                 </li>
               </ul>
             </div>
 
-            <div className="w-1/2 lg:w-1/4 mb-6 lg:mb-0">
-              <h3 className="tracking-px mb-4 text-xs font-semibold uppercase text-[var(--highlight-cyan)]">
+            <div>
+              <h4 className="text-cyan-400 font-semibold uppercase tracking-wider mb-3 text-xs">
                 Legal
-              </h3>
-              <ul>
-                <li className="mb-2">
-                  <Link
-                    className="text-base font-medium text-[var(--text-main)] hover:text-[var(--highlight-cyan)] transition-colors duration-200"
-                    to="/"
-                  >
+              </h4>
+              <ul className="space-y-2">
+                <li>
+                  <Link to="/" className="hover:text-cyan-300">
                     Privacy Policy
                   </Link>
                 </li>
-                <li className="mb-2">
-                  <Link
-                    className="text-base font-medium text-[var(--text-main)] hover:text-[var(--highlight-cyan)] transition-colors duration-200"
-                    to="/"
-                  >
+                <li>
+                  <Link to="/" className="hover:text-cyan-300">
                     Terms of Service
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    className="text-base font-medium text-[var(--text-main)] hover:text-[var(--highlight-cyan)] transition-colors duration-200"
-                    to="/"
-                  >
+                  <Link to="/" className="hover:text-cyan-300">
                     Cookies Policy
                   </Link>
                 </li>
               </ul>
             </div>
 
-            <div className="w-1/2 lg:w-1/4 mb-6 lg:mb-0">
-              <h3 className="tracking-px mb-4 text-xs font-semibold uppercase text-[var(--highlight-cyan)]">
+            <div>
+              <h4 className="text-cyan-400 font-semibold uppercase tracking-wider mb-3 text-xs">
                 Connect
-              </h3>
-              <ul>
-                <li className="mb-2">
+              </h4>
+              <ul className="space-y-2">
+                <li>
                   <a
-                    href="https://github.com/your-github-profile/VibeScribe" // Replace with your actual GitHub repo
+                    href="https://github.com/itzVarun1426"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-base font-medium text-[var(--text-main)] hover:text-[var(--highlight-cyan)] transition-colors duration-200 flex items-center"
+                    className="flex items-center hover:text-cyan-300"
                   >
                     <FaGithub className="mr-2" /> GitHub
                   </a>
                 </li>
-                {/* Add more social links as needed */}
               </ul>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </footer>
   );
 }
 

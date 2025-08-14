@@ -40,9 +40,6 @@ const PostForm = ({ post }) => {
       if (file) {
         data.featuredImage = file.$id;
       }
-      console.log(data);
-      console.log(userData);
-      console.log(userData.user.$id);
 
       const createdPost = await appwriteConfig.createPost({
         ...data,
@@ -74,64 +71,75 @@ const PostForm = ({ post }) => {
   }, [watch, setValue, slugTransform]);
 
   return (
-    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
-      <div className="w-2/3 px-2">
-        <Input
-          label="Title :"
-          placeholder="Title"
-          className="mb-4"
-          {...register("title", { required: true })}
-        />
-        <Input
-          label="Slug :"
-          placeholder="Slug"
-          className="mb-4"
-          {...register("slug", { required: true })}
-          onInput={(e) => {
-            setValue("slug", slugTransform(e.currentTarget.value), {
-              shouldValidate: true,
-            });
-          }}
-        />
-        <RTE
-          label="Content :"
-          name="content"
-          control={control}
-          defaultValue={getValues("content")}
-        />
-      </div>
+    <form
+      onSubmit={handleSubmit(submit)}
+      className="glass-card max-w-2xl mx-auto p-6 rounded-xl border border-white/10 backdrop-blur-lg bg-white/10 flex flex-col gap-6"
+    >
+      <Input
+        label="Title"
+        labelclassname="text-green font-semibold"
+        placeholder="Enter post title"
+        className="w-full text-red placeholder-gray-500"
+        {...register("title", { required: true })}
+      />
 
-      <div className="w-1/3 px-2">
-        <Input
-          label="Featured Image :"
-          type="file"
-          className="mb-4"
-          accept="image/png, image/jpg, image/jpeg, image/gif"
-          {...register("image", { required: !post })}
-        />
-        {post && (
-          <div className="w-full mb-4">
-            <img
-              src={appwriteConfig.getFilePreview(post.featuredImage)}
-              alt={post.title}
-              className="rounded-lg"
-            />
-          </div>
-        )}
-        <Select
-          options={["active", "inactive"]}
-          label="Status"
-          className="mb-4"
-          {...register("status", { required: true })}
-        />
-        <Button
-          type="submit"
-          bgColor={post ? "bg-green-500" : undefined}
-          className="w-full"
-        >
-          {post ? "Update" : "Submit"}
-        </Button>
-      </div>
+      <Input
+        label="Slug"
+        labelclassname="text-black font-semibold"
+        placeholder="Auto-generated from title"
+        className="w-full text-black placeholder-gray-500"
+        {...register("slug", { required: true })}
+        onInput={(e) => {
+          setValue("slug", slugTransform(e.currentTarget.value), {
+            shouldValidate: true,
+          });
+        }}
+      />
+      <Input
+        label="Featured Image"
+        labelclassname="text-black font-semibold"
+        type="file"
+        accept="image/png, image/jpg, image/jpeg, image/gif"
+        className="text-black"
+        {...register("image", { required: !post })}
+      />
+      <RTE
+        label="Content"
+        labelclassname="text-black font-semibold"
+        name="content"
+        control={control}
+        defaultValue={getValues("content")}
+      />
+
+      {post && (
+        <div className="w-full">
+          <img
+            src={appwriteConfig.getFilePreview(post.featuredImage)}
+            alt={post.title}
+            className="rounded-lg shadow-lg border border-white/10 object-cover"
+          />
+        </div>
+      )}
+
+      <Select
+        options={["active", "inactive"]}
+        label="Status"
+        labelclassname="text-black font-semibold"
+        className="text-black"
+        {...register("status", { required: true })}
+      />
+
+      <Button
+        type="submit"
+        bgColor={
+          post
+            ? "bg-green-500 hover:bg-green-600"
+            : "bg-cyan-500 hover:bg-cyan-600"
+        }
+        className="w-full text-white font-semibold rounded-lg shadow-md transition"
+      >
+        {post ? "Update" : "Submit"}
+      </Button>
     </form>
   );
 };

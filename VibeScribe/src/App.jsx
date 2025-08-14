@@ -1,10 +1,11 @@
-import "./App.css";
 import React, { useState, useEffect } from "react";
 import { Header, Footer } from "./components";
+import { Outlet } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import authService from "./appwrite/auth";
 import { login, logout } from "./store/authSlice";
-import { Outlet } from "react-router-dom";
+import "./App.css";
+import { FadeLoader } from "react-spinners";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -23,22 +24,20 @@ function App() {
         setLoading(false);
       }
     };
-
     fetchUser();
   }, [dispatch]);
+
   return !loading ? (
-    <div className="min-h-screen flex flex-wrap content-between bg-gray-400">
-      <div className="w-full block">
-        <Header />
-        <main>
-          <Outlet />
-        </main>
-        <Footer />
-      </div>
+    <div className="relative min-h-screen bg-transparent">
+      <Header />
+      <main>
+        <Outlet />
+      </main>
+      <Footer />
     </div>
   ) : (
     <div className="min-h-screen flex items-center justify-center bg-gray-200">
-      <p className="text-lg font-semibold">Loading...</p>
+      <FadeLoader height={15} loading radius={31} width={5} />
     </div>
   );
 }
