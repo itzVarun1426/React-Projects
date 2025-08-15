@@ -36,12 +36,12 @@ export default function Post() {
   };
 
   return post ? (
-    <div className="py-10 bg-black min-h-screen text-white font-sans">
+    <div className="py-25 bg-black min-h-screen text-white font-sans">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
           {/* LEFT SIDE - Post details */}
           <div className="flex flex-col justify-center space-y-6">
-            <h1 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-cyan-400 to-blue-600 text-transparent bg-clip-text drop-shadow-lg animate-fadeIn">
+            <h1 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r text-yellow-400   bg-clip-text drop-shadow-lg animate-fadeIn">
               {post.title}
             </h1>
 
